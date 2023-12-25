@@ -2,7 +2,7 @@ from enum import Enum
 import timeit as ti
 import numpy as np
 
-
+# Version 1.2.1 I explicitly do not give permission to use without my Consent :)
 # Define the BattleType enum
 class BattleType(Enum):
     STANDARD = 1
