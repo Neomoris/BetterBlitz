@@ -1,3 +1,5 @@
+# Version 1.2.1 I explicitly do not give permission to use without my Consent :)
+
 #({'attacker_wins_big3v3': 0.1376028806584362, 'attacker_wins_small3v3': 0.21469907407407407, 'defender_wins_small3v3': 0.2646604938271605, 'defender_wins_big3v3': 0.3830375514403292}, {'attacker_wins_big3v3': 6420, 'attacker_wins_small3v3': 10017, 'defender_wins_small3v3': 12348, 'defender_wins_big3v3': 17871}, {46656})
 std_dev_att_3v3 = 1.0646471604257168
 std_dev_def_3v3 = 0.859159267051949
