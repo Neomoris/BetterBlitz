@@ -1,6 +1,7 @@
 from enum import Enum
-import timeit as ti
 import numpy as np
+import timeit
+
 
 # Version 1.2.1 I explicitly do not give permission to use without my Consent :)
 # Define the BattleType enum
@@ -90,8 +91,7 @@ class RiskBattle:
         variance_loss_def = self.battle_params.variance_loss_def
 
         # Estimate N
-        n_estimate = self.estimate_n(mean_troop_loss_att, mean_troop_loss_att, attackers_count, defenders_count)
-
+        n_estimate = self.estimate_n(mean_troop_loss_att, mean_troop_loss_def, attackers_count, defenders_count)
         # Scale mean and variance
         mean_troop_loss_att_gaussian = mean_troop_loss_att * n_estimate
         mean_troop_loss_def_gaussian = mean_troop_loss_def * n_estimate
@@ -99,17 +99,17 @@ class RiskBattle:
         variance_loss_def_gaussian = variance_loss_def * np.sqrt(n_estimate)
 
         # Simulate N skirmishes by randomly sampling from the Gaussian distribution curves
-        attackers_simulated_loss = np.random.normal(mean_troop_loss_att_gaussian, variance_loss_att_gaussian, 1)
-        defenders_simulated_loss = np.random.normal(mean_troop_loss_def_gaussian, variance_loss_def_gaussian, 1)
+        attackers_simulated_loss = np.round(
+            np.random.normal(mean_troop_loss_att_gaussian, variance_loss_att_gaussian, 1))
+        defenders_simulated_loss = np.round(
+            np.random.normal(mean_troop_loss_def_gaussian, variance_loss_def_gaussian, 1))
 
         # Update troop counts
-        attackers_count -= attackers_simulated_loss
-        defenders_count -= defenders_simulated_loss
-
+        attackers_count -= int(attackers_simulated_loss[0])
+        defenders_count -= int(defenders_simulated_loss[0])
 
         # Return updated troop counts
-        print("Stage 1: " + str(int(np.round(attackers_count))) + " " +  str(int(np.round(defenders_count))))
-        return int(np.round(attackers_count)), int(np.round(defenders_count))
+        return attackers_count, defenders_count
 
     # Stage 2 - Probabilistic Simulation
     def stage_2_sim(self, attackers_initial, defenders_initial):
@@ -154,7 +154,6 @@ class RiskBattle:
                 else:
                     defenders_count -= 1
                     attackers_count -= 1
-        print("Stage 2: " + str(attackers_count) + " " + str(defenders_count))
         return attackers_count, defenders_count
 
     # Stage 3 - Dice Rolling
@@ -185,7 +184,6 @@ class RiskBattle:
             attacker_count = max(attacker_count, 0)
             defender_count = max(defender_count, 0)
 
-        print("Stage 3: " + str(attacker_count) + " " + str(defender_count))
         # Return final simulation result
         return attacker_count, defender_count
 
@@ -212,6 +210,16 @@ class RiskBattle:
 
 # Main function to use and interact with RiskBattle class
 def main():
+    # Example risk battles
+    risk_battle_small = RiskBattle(8, 8, BattleType.STANDARD)
+    risk_battle_medium = RiskBattle(75, 75, BattleType.STANDARD)
+    risk_battle_large = RiskBattle(750, 750, BattleType.STANDARD)
+
+    print("Small battle: " + str(risk_battle_small.simulate_battle()) + " " + str(timeit.timeit(risk_battle_small.simulate_battle, number=1)))
+
+    print("Medium battle: " + str(risk_battle_medium.simulate_battle()) + " " + str(timeit.timeit(risk_battle_medium.simulate_battle, number=1)))
+
+    print("Large battle: " + str(risk_battle_large.simulate_battle()) + " " + str(timeit.timeit(risk_battle_large.simulate_battle, number=1)))
 
     return 0
 
