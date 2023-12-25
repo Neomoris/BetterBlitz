@@ -1,5 +1,6 @@
 from itertools import product
 
+# Version 1.2.1 I explicitly do not give permission to use without my Consent :)
 
 def main():
     probs = [calculate_dice_outcomes_avd(3, 3, True), calculate_dice_outcomes_avd(3, 2),

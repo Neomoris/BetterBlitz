@@ -1,5 +1,6 @@
 from itertools import product
 import numpy as np
+# Version 1.2.1 I explicitly do not give permission to use without my Consent :)
 
 # Define probabilities as calculated in rem_probabilities.py
 prob_att_win_3v2_zombie = 0.6193415637860082
