@@ -1,5 +1,5 @@
 from enum import Enum
-
+import timeit as ti
 import numpy as np
 
 
@@ -106,8 +106,10 @@ class RiskBattle:
         attackers_count -= attackers_simulated_loss
         defenders_count -= defenders_simulated_loss
 
+
         # Return updated troop counts
-        return attackers_count, defenders_count
+        print("Stage 1: " + str(int(np.round(attackers_count))) + " " +  str(int(np.round(defenders_count))))
+        return int(np.round(attackers_count)), int(np.round(defenders_count))
 
     # Stage 2 - Probabilistic Simulation
     def stage_2_sim(self, attackers_initial, defenders_initial):
@@ -152,7 +154,7 @@ class RiskBattle:
                 else:
                     defenders_count -= 1
                     attackers_count -= 1
-
+        print("Stage 2: " + str(attackers_count) + " " + str(defenders_count))
         return attackers_count, defenders_count
 
     # Stage 3 - Dice Rolling
@@ -162,8 +164,8 @@ class RiskBattle:
 
         # Loop until a final terminal state.
         while attacker_count > 1 and defender_count > 0:
-            attacker_dice = self.roll_dice(min(3, self.battle_params.max_dice_a, attacker_count))
-            defender_dice = self.roll_dice(min(3, self.battle_params.max_dice_d, defender_count))
+            attacker_dice = self.roll_dice(min(self.battle_params.max_dice_a, attacker_count))
+            defender_dice = self.roll_dice(min(self.battle_params.max_dice_d, defender_count))
 
             # Divide logic by battle calculation; one for zombie logic one for regular.
             if self.battle_type == BattleType.ZOMBIE:
@@ -175,21 +177,22 @@ class RiskBattle:
             else:
                 for attacker_die, defender_die in zip(attacker_dice, defender_dice):
                     if attacker_die > defender_die:
-                        attacker_count -= 1  # Defender loses a troop
+                        defender_count -= 1  # Defender loses a troop
                     else:
-                        defender_count -= 1  # Attacker loses a troop
+                        attacker_count -= 1  # Attacker loses a troop
 
             # Ensure we don't leave with an impossible (negative) terminal state
             attacker_count = max(attacker_count, 0)
             defender_count = max(defender_count, 0)
 
-            # Return final simulation result
-            return attacker_count, defender_count
+        print("Stage 3: " + str(attacker_count) + " " + str(defender_count))
+        # Return final simulation result
+        return attacker_count, defender_count
 
     # Battle simulation logic
-    def simulate_battle(self, attacker_initial, defender_initial):
+    def simulate_battle(self):
         # Initialize troop count
-        attacker_count, defender_count = attacker_initial, defender_initial
+        attacker_count, defender_count = self.attackers_count, self.defenders_count
 
         # Loop battle sim until terminal state is reached
         while attacker_count > 1 and defender_count > 0:
@@ -209,6 +212,7 @@ class RiskBattle:
 
 # Main function to use and interact with RiskBattle class
 def main():
+
     return 0
 
 
