@@ -41,8 +41,8 @@ def calculate_dice_outcomes_avd(a, d, is_capital=False):
                 sorted_defender_dice = sorted(defender_dice, reverse=True)[:max(2, d)]
 
                 # Determine the outcome of this dice roll
-                attacker_wins = sum(a > d for a, d in zip(sorted_attacker_dice, sorted_defender_dice))
-                defender_wins = sum(d >= a for a, d in zip(sorted_attacker_dice, sorted_defender_dice))
+                attacker_wins = sum(a >= d for a, d in zip(sorted_attacker_dice, sorted_defender_dice))
+                defender_wins = sum(d > a for a, d in zip(sorted_attacker_dice, sorted_defender_dice))
 
                 # Update the outcomes based on the dice roll results
                 if attacker_wins > defender_wins:
