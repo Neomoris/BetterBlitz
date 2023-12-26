@@ -22,7 +22,10 @@ def main():
                     w += 1
             # Assign winrate to proper heatmap index
             risk_heatmap[a-1][d-1] = float(w / 1000)
+            print(risk_heatmap[a-1][d-1])
+    print("Saving to risk_heatmap.csv")
     np.savetxt("risk_heatmap.csv", risk_heatmap, delimiter=",")
+    print("Save successful!")
     return 0
 
 
