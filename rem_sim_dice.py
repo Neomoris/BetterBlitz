@@ -1,9 +1,8 @@
 from enum import Enum
 import numpy as np
-import timeit
 
 
-# Version 1.2.3 I explicitly do not give permission to use without my Consent :)
+# Version 1.2.3 I explicitly do not give permission to use without my Consent
 # Define the BattleType enum
 class BattleType(Enum):
     STANDARD = 1
@@ -68,7 +67,7 @@ class RiskBattle:
         n = round(min(n_a, n_d))
         return n
 
-    # Function to fill in battle parameters from SubClass into instanced RiskBattle
+    # Fill in  Parameter Class into RiskBattle.battle_params
     def set_battle_parameters(self):
         if self.battle_type == BattleType.STANDARD:
             return self.StandardBattle
@@ -112,21 +111,6 @@ class RiskBattle:
 
 # Main function to use and interact with RiskBattle class
 def main():
-    sample_size = 100
-    wr_matrix_standard = [[None for _ in range(sample_size)] for _ in range(sample_size)]
-    for a in range(1, sample_size):
-        for d in range(1, sample_size):
-            risk_battle = RiskBattle(a, d, BattleType.STANDARD)
-            w = 0
-            for _ in range(1, 1000):
-                # noinspection SpellCheckingInspection
-                asim, dsim = risk_battle.simulate_battle()
-                if asim > dsim:
-                    w += 1
-            wr = w / 1000
-            print("wr - " + str(a) + "v" + str(d) + ": " + str(min(100, (wr*100)) )+ "%")
-            wr_matrix_standard[a-1][d-1]=wr
-    print(wr_matrix_standard)
     return 0
 
 
