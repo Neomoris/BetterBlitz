@@ -215,11 +215,14 @@ def main():
     risk_battle_medium = RiskBattle(75, 75, BattleType.STANDARD)
     risk_battle_large = RiskBattle(750, 750, BattleType.STANDARD)
 
-    print("Small battle: " + str(risk_battle_small.simulate_battle()) + " " + str(timeit.timeit(risk_battle_small.simulate_battle, number=1)))
+    print("Small battle: " + str(risk_battle_small.simulate_battle()) + " " +
+          str(timeit.timeit(risk_battle_small.simulate_battle, number=1)))
 
-    print("Medium battle: " + str(risk_battle_medium.simulate_battle()) + " " + str(timeit.timeit(risk_battle_medium.simulate_battle, number=1)))
+    print("Medium battle: " + str(risk_battle_medium.simulate_battle()) + " " +
+          str(timeit.timeit(risk_battle_medium.simulate_battle, number=1)))
 
-    print("Large battle: " + str(risk_battle_large.simulate_battle()) + " " + str(timeit.timeit(risk_battle_large.simulate_battle, number=1)))
+    print("Large battle: " + str(risk_battle_large.simulate_battle()) + " " +
+           str(timeit.timeit(risk_battle_large.simulate_battle, number=1)))
 
     return 0
 
