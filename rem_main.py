@@ -1,8 +1,8 @@
 from itertools import product
 import numpy as np
-# Version 1.2.1 I explicitly do not give permission to use without my Consent :)
+# Version 1.2.3 I explicitly do not give permission to use without my Consent :)
 
-# Define probabilities as calculated in rem_probabilities.py
+# Define probabilities as calculated in rem_generate_probability.py
 prob_att_win_3v2_zombie = 0.6193415637860082
 prob_def_win_3v2_zombie = 0.12590020576131689
 prob_tie_3v2_zombie = 0.25475823045267487

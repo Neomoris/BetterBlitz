@@ -3,7 +3,7 @@ import numpy as np
 import timeit
 
 
-# Version 1.2.1 I explicitly do not give permission to use without my Consent :)
+# Version 1.2.3 I explicitly do not give permission to use without my Consent :)
 # Define the BattleType enum
 class BattleType(Enum):
     STANDARD = 1
